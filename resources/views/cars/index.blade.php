@@ -1,9 +1,13 @@
 @extends('layouts.app')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 @section('content')
 <div class="container mt-4">
     <h1>All Car Models</h1>
+
+    {{-- Add New Car Button --}}
+    <div class="mb-2">
+        <a href="{{ route('cars.create') }}" class="btn btn-success">Add New Car</a>
+    </div>
 
     {{-- Dropdown menu for filtering cars by manufacturer --}}
     <div class="form-group">
@@ -15,11 +19,12 @@
             @endforeach
         </select>
     </div>
+
     @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <table class="table table-bordered table-hover">
         <thead class="thead-dark">
@@ -40,8 +45,15 @@
                     <td>{{ $car->year }}</td>
                     <td>{{ $car->salesperson_email }}</td>
                     <td>{{ $car->manufacturer->name }}</td>
-                    <a href="{{ route('cars.create') }}" class="btn btn-success">Add New</a>
-
+                    <td>
+                        <a href="{{ route('cars.show', $car->id) }}" class="btn btn-info btn-sm">Details</a>
+                        <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                        <form action="{{ route('cars.destroy', $car->id) }}" method="POST" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
@@ -53,15 +65,10 @@
     $(document).ready(function () {
         $('#manufacturerFilter').on('change', function () {
             var selectedManufacturerId = $(this).val();
-
-           
             $('tbody tr').hide();
-
             if (selectedManufacturerId === '') {
-                
                 $('tbody tr').show();
             } else {
-              
                 $('tbody tr[data-manufacturer-id="' + selectedManufacturerId + '"]').show();
             }
         });
