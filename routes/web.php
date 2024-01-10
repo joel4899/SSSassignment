@@ -2,14 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
-
-// Home page route (this might already exist)
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 use App\Http\Controllers\ManufacturerController;
+Route::redirect('/', '/cars');
+
+
+
 Route::get('/manufacturer', [ManufacturerController::class, 'index']);
 
 Route::get('/cars', [CarController::class, 'index'])->name('cars.index');

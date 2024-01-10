@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -14,7 +14,7 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
   </head>
   <body>
-    <!-- navbar -->
+   
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
         <a class="navbar-brand text-uppercase" href="cars">            
@@ -24,7 +24,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
             
-        <!-- /.navbar-header -->
+       
         <div class="collapse navbar-collapse" id="navbar-toggler">
           <ul class="navbar-nav">
             <li class="nav-item"><a href="manufacturer" class="nav-link">Manufacturers</a></li>
@@ -35,7 +35,7 @@
     </nav>
 
     @yield('content')
-
+    @stack('scripts')
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
