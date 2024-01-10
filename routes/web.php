@@ -8,5 +8,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Car routes
-Route::get('/cars', [CarController::class, 'index']);
+
+use App\Http\Controllers\ManufacturerController;
+Route::get('/manufacturer', [ManufacturerController::class, 'index']);
+
+Route::get('/cars', [CarController::class, 'index'])->name('cars.index');
+Route::get('/cars/create', [CarController::class, 'create'])->name('cars.create');
+Route::post('/cars', [CarController::class, 'store'])->name('cars.store');

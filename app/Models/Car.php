@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
     protected $fillable = ['model', 'year', 'salesperson_email', 'manufacturer_id'];
-
+    public $timestamps = false;
     public function manufacturer()
     {
         // Assuming your foreign key on the 'cars' table is 'manufacturer_id'
