@@ -11,8 +11,9 @@ class CarController extends Controller
 {
     public function index()
     {
-        $manufacturers = Manufacturer::all();
-        $cars = Car::all(); // Retrieve all cars from the database
+        
+        $cars = Car::all(); 
+        $manufacturers = Manufacturer::all(); // Retrieve all cars from the database
         return view('cars.index', compact('cars','manufacturers')); // Pass the car data to the view
     }
     public function create()
@@ -37,8 +38,11 @@ public function store(Request $request)
 public function show($id)
 {
     $car = Car::with('manufacturer')->findOrFail($id);
-    return view('cars.show', compact('car'));
+    $manufacturer = $car->manufacturer;
+
+    return view('cars.show', compact('car', 'manufacturer'));
 }
+
 
 public function destroy($id)
 {
